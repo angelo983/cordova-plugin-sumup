@@ -15,11 +15,11 @@ import com.sumup.merchant.reader.api.SumUpState;
 import com.sumup.merchant.reader.api.SumUpAPI;
 import com.sumup.merchant.reader.api.SumUpLogin;
 import com.sumup.merchant.reader.api.SumUpPayment;
-import com.sumup.merchant.reader.cardreader.ReaderLibManager;
-import com.sumup.merchant.reader.CoreState;
+import com.sumup.merchant.reader.cardreader.ReaderCoreManager;
+import com.sumup.merchant.reader.identitylib.models.IdentityModel;
 import com.sumup.merchant.reader.models.TransactionInfo;
-import com.sumup.merchant.reader.models.UserModel;
-import com.sumup.readerlib.CardReaderManager;
+import com.sumup.merchant.reader.readerlib.CardReaderManager;
+import com.sumup.merchant.reader.ReaderModuleCoreState;
 
 import java.math.BigDecimal;
 
@@ -159,8 +159,8 @@ public class SumUp extends CordovaPlugin {
                 }
 
                 if (accessToken != null) {
-                    UserModel um;
-                    um = CoreState.Instance().get(UserModel.class);
+                    IdentityModel um;
+                    um = ReaderModuleCoreState.Instance().get(IdentityModel.class);
                     um.setAccessToken(accessToken.toString());
 
                     JSONObject obj = createReturnObject(AUTH_SUCCESSFUL, "Authenticate was successful");
@@ -230,8 +230,8 @@ public class SumUp extends CordovaPlugin {
         try {
             Handler handler = new Handler(cordova.getActivity().getMainLooper());
             handler.post(() -> {
-                ReaderLibManager rlm;
-                rlm = CoreState.Instance().get(ReaderLibManager.class);
+                ReaderCoreManager rlm;
+                rlm = ReaderModuleCoreState.Instance().get(ReaderCoreManager.class);
 
                 //if(!rlm.isReadyToTransmit()) {
                 //    JSONObject obj = createReturnObject(CARDREADER_NOT_READY_TO_TRANSMIT, "Card reader is not ready to transmit");
@@ -385,8 +385,8 @@ public class SumUp extends CordovaPlugin {
                     } else {
                         obj = createReturnObject(code, "Payment error");
 
-                        UserModel um;
-                        um = CoreState.Instance().get(UserModel.class);
+                        IdentityModel um;
+                        um = ReaderModuleCoreState.Instance().get(IdentityModel.class);
                         if(!um.isLoggedIn()) {
                             obj = createReturnObject(SumUpAPI.Response.ResultCode.ERROR_NOT_LOGGED_IN, "Not logged in");
                         } else {
