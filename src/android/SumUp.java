@@ -17,9 +17,9 @@ import com.sumup.merchant.reader.api.SumUpLogin;
 import com.sumup.merchant.reader.api.SumUpPayment;
 import com.sumup.merchant.reader.cardreader.ReaderLibManager;
 import com.sumup.merchant.reader.CoreState;
-import com.sumup.merchant.reader.Models.TransactionInfo;
+import com.sumup.merchant.reader.models.TransactionInfo;
 import com.sumup.merchant.reader.CardReaderManager;
-import com.sumup.merchant.reader.Models.UserModel;
+import com.sumup.merchant.reader.models.UserModel;
 
 import java.math.BigDecimal;
 
