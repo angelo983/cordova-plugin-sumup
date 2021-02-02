@@ -18,7 +18,6 @@ import com.sumup.merchant.reader.api.SumUpPayment;
 import com.sumup.merchant.reader.cardreader.ReaderCoreManager;
 import com.sumup.merchant.reader.identitylib.models.IdentityModel;
 import com.sumup.merchant.reader.models.TransactionInfo;
-import com.sumup.merchant.reader.readerlib.CardReaderManager;
 import com.sumup.merchant.reader.ReaderModuleCoreState;
 
 import java.math.BigDecimal;
@@ -237,7 +236,7 @@ public class SumUp extends CordovaPlugin {
                 //    JSONObject obj = createReturnObject(CARDREADER_NOT_READY_TO_TRANSMIT, "Card reader is not ready to transmit");
                 //    returnCordovaPluginResult(PluginResult.Status.ERROR, obj, true);
                 //} else {
-                if(CardReaderManager.getInstance() != null) {
+                if(ReaderCoreManager.getInstance() != null) {
                     try {
                         SumUpAPI.prepareForCheckout();
                         JSONObject obj = createReturnObject(1, "SumUp checkout prepared successfully");
@@ -267,9 +266,9 @@ public class SumUp extends CordovaPlugin {
         try {
             Handler handler = new Handler(cordova.getActivity().getMainLooper());
             handler.post(() -> {
-                if(CardReaderManager.getInstance() != null) {
+                if(ReaderCoreManager.getInstance() != null) {
                     try {
-                        CardReaderManager.getInstance().stopDevice();
+                        ReaderCoreManager.getInstance().stopDevice();
                         JSONObject obj = createReturnObject(1, "Card reader successfully stopped");
                         returnCordovaPluginResult(PluginResult.Status.OK, obj, false);
                     } catch (Exception e) {
