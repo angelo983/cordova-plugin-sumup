@@ -266,9 +266,17 @@ public class SumUp extends CordovaPlugin {
         try {
             Handler handler = new Handler(cordova.getActivity().getMainLooper());
             handler.post(() -> {
+                ReaderCoreManager rlm;
+                rlm = ReaderModuleCoreState.Instance().get(ReaderCoreManager.class);
+
+                //if(!rlm.isReadyToTransmit()) {
+                //    JSONObject obj = createReturnObject(CARDREADER_NOT_READY_TO_TRANSMIT, "Card reader is not ready to transmit");
+                //    returnCordovaPluginResult(PluginResult.Status.ERROR, obj, true);
+                //} else {
                 if(ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()) != null) {
                     try {
-                        ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()).stopScan();
+                        //ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()).stopDevice();
+                        rlm.stopDevice();
                         JSONObject obj = createReturnObject(1, "Card reader successfully stopped");
                         returnCordovaPluginResult(PluginResult.Status.OK, obj, false);
                     } catch (Exception e) {
@@ -279,6 +287,7 @@ public class SumUp extends CordovaPlugin {
                     JSONObject obj = createReturnObject(CARDREADER_INSTANCE_NOT_DEFINED, "CardReader instance is not defined");
                     returnCordovaPluginResult(PluginResult.Status.ERROR, obj, true);
                 }
+                //}
             });
         } catch (Exception e) {
             JSONObject obj = createReturnObject(FAILED_CLOSE_CARD_READER_CONN, e.getMessage());
