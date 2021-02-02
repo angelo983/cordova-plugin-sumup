@@ -1,7 +1,3 @@
-# Not maintained
-
-I will no longer maintain this plugin. If you want to make changes, feel free to open a pull request. I will still review this changes and merge them if they are compatible.
-
 # Cordova plugin for SumUp SDK
 
 ## Description
@@ -364,6 +360,7 @@ In **examples/ionic** is an example app with Ionic.
 
 ## Changelog
 
+- 1.3.0: Updated SumUp Android SDK to version 3.3.0
 - 1.2.0: Provide the SUMUP_API_KEY (Affiliate Key) from JavaScript
 - 1.1.1: Updated SumUp Android SDK to version 3.2.1
 - 1.1.0: Updated SumUp Android SDK to version 3.2.0
