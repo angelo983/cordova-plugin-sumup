@@ -236,7 +236,7 @@ public class SumUp extends CordovaPlugin {
                 //    JSONObject obj = createReturnObject(CARDREADER_NOT_READY_TO_TRANSMIT, "Card reader is not ready to transmit");
                 //    returnCordovaPluginResult(PluginResult.Status.ERROR, obj, true);
                 //} else {
-                if(ReaderCoreManager.getInstance(callback) != null) {
+                if(ReaderCoreManager.getInstance(ReaderModuleCoreState.getInstance().getContext()) != null) {
                     try {
                         SumUpAPI.prepareForCheckout();
                         JSONObject obj = createReturnObject(1, "SumUp checkout prepared successfully");
@@ -266,9 +266,9 @@ public class SumUp extends CordovaPlugin {
         try {
             Handler handler = new Handler(cordova.getActivity().getMainLooper());
             handler.post(() -> {
-                if(ReaderCoreManager.getInstance(callback) != null) {
+                if(ReaderCoreManager.getInstance(ReaderModuleCoreState.getInstance().getContext()) != null) {
                     try {
-                        ReaderCoreManager.getInstance(callback).stopDevice();
+                        ReaderCoreManager.getInstance(ReaderModuleCoreState.getInstance().getContext()).stopDevice();
                         JSONObject obj = createReturnObject(1, "Card reader successfully stopped");
                         returnCordovaPluginResult(PluginResult.Status.OK, obj, false);
                     } catch (Exception e) {
