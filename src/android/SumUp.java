@@ -268,7 +268,7 @@ public class SumUp extends CordovaPlugin {
             handler.post(() -> {
                 if(ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()) != null) {
                     try {
-                        ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()).stopDevice();
+                        ReaderCoreManager.getInstance(ReaderModuleCoreState.Instance().getContext()).stopScan();
                         JSONObject obj = createReturnObject(1, "Card reader successfully stopped");
                         returnCordovaPluginResult(PluginResult.Status.OK, obj, false);
                     } catch (Exception e) {
